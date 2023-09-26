@@ -1,0 +1,30 @@
+print('Các ví dụ liên quan đến strings ...')
+print('--------------------------------------------')
+
+print('Chuỗi ví dụ mẫu : strSample')
+strSample = "một chuỗi ví dụ mẫu dành cho chúng ta"
+print(strSample)
+
+print(' - strSample.capitalize(): ' + strSample.capitalize() + ', length = ' + str(len(strSample)))
+print(' - strSample.center(100): [' + strSample.center(70) + ']')
+print(" - strSample.center(100, '*')" + strSample.center(70, '*') + ']')
+
+print(' ------------------------------')
+print(' - strSample.endswith("chúng ta"): ' + str(strSample.endswith('chúng ta')))
+print(' - strSample.find("ví dụ mẫu"): ' + str(strSample.find("ví dụ mẫu")))
+print(' - strSample.find("đường xưa"): ' + str(strSample.find("đường xưa")))
+print(' - "123abcEFG".isalnum(): ' + str("123abcEFG".isalnum()))
+print(' - "123abcEFG".isalpha(): ' + str("123abcEFG".isalpha()))
+print(' - "012345".isdigit(): ' + str("012345".isdigit()))
+print(' - strSample.islower(): ' + str(strSample.islower()))
+print(' - strSample.isupper(): ' + str(strSample.isupper()))
+print(' - "012345".isnumeric(): ' + str("012345".isnumeric()))
+print(' - "12345".isnumeric(): ' + str("12345".isnumeric()))
+print(' - strSample.istitle(): ' + str(strSample.istitle()))
+print(' - strSample.join(["{item01}", "{item02}", "{item03}"]): ' + strSample.join(['{item01}', '{item02}', '{item03}']))
+print(' - strSample.ljust(100,"+" ): ' + strSample.ljust(100, "+"))
+print(' - strSample.r(100,"+" ): ' + strSample.rjust(100, "+"))
+print(' ------------------------------------------')
+print(' - strSample.upper(): ' + strSample.upper())
+print(' - strSample.title(): ' + strSample.title())
+
