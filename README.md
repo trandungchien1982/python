@@ -18,3 +18,20 @@ Mỗi nhánh trong Repo sẽ là 1 ví dụ/ giải pháp/ project mẫu trong P
 ```
 D:\Projects\python
 ```
+
+==============================================================
+
+# Ví dụ [01.HelloWorld]
+==============================================================
+
+**Ta sẽ tạo 1 App Python mẫu như sau:**<br/>
+- In ra lời chào thế giới
+- Chúc ngày mới vui vẻ :)
+
+**Kết quả thực thi**<br/>
+```shell
+tdc@tdc:~/python/hello-world$ python3 helloworld.py 
+Hello! Welcome to Python World!
+Have a nice day!
+
+```
