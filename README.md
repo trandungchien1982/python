@@ -21,41 +21,28 @@ D:\Projects\python
 
 ==============================================================
 
-# Ví dụ [05.ServerClientSocket] Tạo Web App Socket đơn giản với 1 Server + 1 Client
+# Ví dụ [06.RegularExpression] Tìm hiểu về RegularExpression trong Python
 ==============================================================
 
-**Ta sẽ tạo 2 WebApps bao gồm:**<br/>
-- ServerSocket cho phép accept 1 kết nối Client
-- ClientSocket thực hiện kết nối đến Server
+**----------:**<br/>
+- TH 01
+- TH 02
+
+**Phần RegularExpression sẽ tìm hiểu kỹ hơn trong tương lai. <br/>
+Hiện tại thì Skip thôi**
+(Nó cũng gần giống với Regular Expression trong Java)
 
 
 **Nguồn tham khảo**
 - https://toidicode.com/hoc-python-nang-cao
-- https://toidicode.com/lap-trinh-mang-voi-module-socket-trong-python-364.html
+- https://toidicode.com/regular-expression-trong-python-365.html
+- https://toidicode.com/regular-expression-trong-python-p2-366.html
 
 
 **Kết quả thực thi**<br/>
 - *Launch Server Socket*
 ```shell
-tdc@tdc:~/python/server-client-socket$ python3 server-socket.py 
+tdc@tdc:~/python/server-client-socket$ python3 ...
 ------------------------------------------------------------------------
-Server Side Socket!
-Các ví dụ liên quan đến Server-Client dùng Socket ...
-Thiết lập Server Socket cho phép accept() 1 kết nối ...
--------------------------------------------------------------
-Connected by ('127.0.0.1', 57526)
-b'Gui loi chao den ServerSocket!'
-b''
-
-```
-
-- *Launch Client Socket*
-```shell
-tdc@tdc:~/python/server-client-socket$ python3 client-socket.py
-------------------------------------------------------------------------
-ClientSide - Socket
-Thiết lập Socket từ phía Client và tiến hành kết nối để tương tác với ServerSocket ...
--------------------------------------------------------------
-Server Response: b'Hello Client!'
 
 ```
