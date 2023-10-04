@@ -40,9 +40,9 @@ Hiện tại thì Skip thôi**
 
 
 **Kết quả thực thi**<br/>
-- *Launch Server Socket*
+- *Launch Regular Expressions*
 ```shell
-tdc@tdc:~/python/server-client-socket$ python3 ...
+tdc@tdc:~/python/regular-expression$ python3 ...
 ------------------------------------------------------------------------
 
 ```
