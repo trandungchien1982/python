@@ -21,39 +21,41 @@ D:\Projects\python
 
 ==============================================================
 
-# Ví dụ [04.SimpleWebServer] Tạo WebApps đơn giản support GET/POST/... http requests ...
+# Ví dụ [05.ServerClientSocket] Tạo Web App Socket đơn giản với 1 Server + 1 Client
 ==============================================================
 
-**Ta sẽ tạo 1 WebApps có xử lý 2 HTTP RESTful đơn giản:**<br/>
-- GET  http://localhost:9005/
-- POST http://localhost:9005/
+**Ta sẽ tạo 2 WebApps bao gồm:**<br/>
+- ServerSocket cho phép accept 1 kết nối Client
+- ClientSocket thực hiện kết nối đến Server
 
 
 **Nguồn tham khảo**
 - https://toidicode.com/hoc-python-nang-cao
-- https://toidicode.com/khoi-tao-server-trong-python-363.html
+- https://toidicode.com/lap-trinh-mang-voi-module-socket-trong-python-364.html
 
 
 **Kết quả thực thi**<br/>
-- *Launch WebApp server*
+- *Launch Server Socket*
 ```shell
-tdc@tdc:~/python/simple-web-server$ python3 http-Server.py
+tdc@tdc:~/python/server-client-socket$ python3 server-socket.py 
 ------------------------------------------------------------------------
-Các ví dụ liên quan đến Web Server cơ bản ...
---------------------------------------------
+Server Side Socket!
+Các ví dụ liên quan đến Server-Client dùng Socket ...
+Thiết lập Server Socket cho phép accept() 1 kết nối ...
+-------------------------------------------------------------
+Connected by ('127.0.0.1', 57526)
+b'Gui loi chao den ServerSocket!'
+b''
 
 ```
 
-- *GET*
+- *Launch Client Socket*
 ```shell
-GET  http://localhost:9500/
-----------------------------------------------------------------------------
-Hoc Lap Trinh Tai Toidicode.com, dành cho GET HTTP RESTful ...
-```
+tdc@tdc:~/python/server-client-socket$ python3 client-socket.py
+------------------------------------------------------------------------
+ClientSide - Socket
+Thiết lập Socket từ phía Client và tiến hành kết nối để tương tác với ServerSocket ...
+-------------------------------------------------------------
+Server Response: b'Hello Client!'
 
-- *POST*
-```shell
-POST  http://localhost:9500/
-----------------------------------------------------------------------------
-Message từ Toidicode.com - For POST type of HTTP RESTful ...
 ```
