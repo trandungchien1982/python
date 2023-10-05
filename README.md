@@ -21,97 +21,66 @@ D:\Projects\python
 
 ==============================================================
 
-# Ví dụ [07.MultiThreading] Xử lý đa luồng ...
+# Ví dụ [08.DateTime] Xử lý thời gian (date/datetime) ...
 ==============================================================
 
 **Ta sẽ tạo các Class Python bao gồm:**<br/>
-- 2 functions được xử lý tuần tự trong 1 Thread chính duy nhất (legacy), mỗi bước tính toán chờ 0.2s và 0.3s
-- 2 functions được xử lý concurrency ở 2 Thread khác nhau, bước tính toán chờ như trên
-- 2 function xử lý tài nguyên chung & cần cơ chế Lock
-- Tạo daemond thread để có thể tuỳ biến việc stop thread an toàn ...
+- Xử lý trên date time objects (thêm ngày/tháng/năm/đếm thời gian ...)
+- Format date object thành chuỗi thời gian
+- Convert từ String sang Date Object dựa trên format chỉ định
+- Xử lý Timezone, DST, ...
 
 
 **Nguồn tham khảo**
-- https://viblo.asia/p/da-luong-trong-python-multithreading-WAyK8MO6ZxX
+- https://quantrimang.com/hoc/datetime-trong-python-162195
+- https://bobbyhadz.com/blog/python-add-months-to-date<br/>
+	(cần bổ sung thư viện ngoài bằng lệnh `pip3 install python-dateutil`)
 
 
 **Kết quả thực thi**<br/>
-- *1 Thread duy nhất: 2 functions (legacy)*
 ```shell
-tdc@tdc:~/python/multi-threading$ python3 one-thread+2functions.py
-Ví dụ về xử lý data luồng (1 thread + 2 functions tính toán) ...
+tdc@tdc:~/python/date-time$ python3 date-time-calculate.py 
+-----------------------------------------------------------------
+Ví dụ về xử lý tính toán trên date/time object ...
 -------------------------------------------------------
 
---- Hàm cal_square với numbers: (2, 6, 7, 30, 10, 9, 17, 20, -30)
- ----> Current number 2: square(2) = 4
- ----> Current number 6: square(6) = 36
- ----> Current number 7: square(7) = 49
- ----> Current number 30: square(30) = 900
- ----> Current number 10: square(10) = 100
- ----> Current number 9: square(9) = 81
- ----> Current number 17: square(17) = 289
- ----> Current number 20: square(20) = 400
- ----> Current number -30: square(-30) = 900
+ + Thao tác trên date/datetime objects ...
+------------------------------------------------
+Current date/time/datetime: ...
+ -- date: 2023-10-05
+ -- datetime: 2023-10-05 23:00:14.701761
+ -- timedelta: 613 days, 6:54:55.298239
+ -- timedelta: 
+Tăng lên 1 ngày ...
+ -- date(now) + 1d =  2023-10-06
+ -- datetime(now) + 1d =  2023-10-06 23:00:14.701761
+Tăng lên 1 tuần ...
+ -- date(now) + 1w =  2023-10-12
+ -- datetime(now) + 1w =  2023-10-12 23:00:14.701761
+Tăng lên 1 tháng ...
+ -- date(now) + 1month = 2023-11-05
+ -- datetime(now) + 1month = 2023-11-05 23:00:14.701761
+Tăng lên 1 năm ...
+ -- date(now) + 1year = 2024-10-05
+ -- datetime(now) + 1year = 0001-10-05 23:00:14.701761
 
---- Hàm cal_cube với numbers: [1, 2, 5, 10, 11, 12, 15, 8, 77, -39]
- ===> Current number 1: cube(1) = 1
- ===> Current number 2: cube(2) = 8
- ===> Current number 5: cube(5) = 125
- ===> Current number 10: cube(10) = 1000
- ===> Current number 11: cube(11) = 1331
- ===> Current number 12: cube(12) = 1728
- ===> Current number 15: cube(15) = 3375
- ===> Current number 8: cube(8) = 512
- ===> Current number 77: cube(77) = 456533
- ===> Current number -39: cube(-39) = -59319
->> Tổng thời gian: 4
+ + Format date/datetime ...
+------------------------------------------------
+ -- date:  05-10-2023
+ -- date (nicer):  Thursday, 05-October-2023
+ -- date (short):  Thu, 05-Oct-2023
+ -- datetime:  05-10-2023 23:00:14
+ -- datetime(nicer):  Thursday, 05-October-2023 23:00:14
+ -- datetime(short):  Thu, 05-Oct-2023 11:00:14 PM
+ -- datetime(short+TZ):  Thu, 05-Oct-2023 11:00:14 PM
 
-```
+ + Convert từ string sang date/datetime object ...
+-----------------------------------------------------------
+TODO: 
 
-- *2 Threads + xử lý 2 functions*
-```shell
-tdc@tdc:~/python/multi-threading$ python3 two-threads.py
-------------------------------------------------------------------------
-Ví dụ về xử lý data luồng (2 threads cho 2 functions tính toán) ...
--------------------------------------------------------
+ + Xử lý Timezone, DST ...
+-----------------------------------------------------------
+TODO: 
 
---- Hàm cal_square với numbers: (2, 6, 7, 30, 10, 9, 17, 20, -30)
-
---- Hàm cal_cube với numbers: [1, 2, 5, 10, 11, 12, 15, 8, 77, -39]
- ----> Current number 2: square(2) = 4
- |||||||||||| ~ ~ ~> Current number 1: CUBE(1) = 1
- ----> Current number 6: square(6) = 36
- ----> Current number 7: square(7) = 49
- |||||||||||| ~ ~ ~> Current number 2: CUBE(2) = 8
- ----> Current number 30: square(30) = 900
- |||||||||||| ~ ~ ~> Current number 5: CUBE(5) = 125
- ----> Current number 10: square(10) = 100
- |||||||||||| ~ ~ ~> Current number 10: CUBE(10) = 1000
- ----> Current number 9: square(9) = 81
- ----> Current number 17: square(17) = 289
- |||||||||||| ~ ~ ~> Current number 11: CUBE(11) = 1331
- ----> Current number 20: square(20) = 400
- ----> Current number -30: square(-30) = 900
- |||||||||||| ~ ~ ~> Current number 12: CUBE(12) = 1728
- |||||||||||| ~ ~ ~> Current number 15: CUBE(15) = 3375
- |||||||||||| ~ ~ ~> Current number 8: CUBE(8) = 512
- |||||||||||| ~ ~ ~> Current number 77: CUBE(77) = 456533
- |||||||||||| ~ ~ ~> Current number -39: CUBE(-39) = -59319
->> Tổng thời gian: 3
-
-
-```
-
-- *Xử lý tài nguyên chung & Apply cơ chế Lock*
-```shell
-tdc@tdc:~/python/multi-threading$ python3 ...
-------------------------------------------------------------------------
-
-```
-
-- *Tạo Daemond Thread để tuỳ biến việc stop thread an toàn*
-```shell
-tdc@tdc:~/python/multi-threading$ python3 ...
-------------------------------------------------------------------------
 
 ```
