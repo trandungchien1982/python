@@ -21,125 +21,97 @@ D:\Projects\python
 
 ==============================================================
 
-# Ví dụ [03.OOP] Lập trình hướng đối tượng ...
+# Ví dụ [07.MultiThreading] Xử lý đa luồng ...
 ==============================================================
 
-**Ta sẽ tạo các Class Python mẫu liên quan đến OOP như sau:**<br/>
-- Khai báo các biến public/protected/private
-- Hàm constructor/destructor
-- Kế thừa (multiple)
-- Abstract class/methods
+**Ta sẽ tạo các Class Python bao gồm:**<br/>
+- 2 functions được xử lý tuần tự trong 1 Thread chính duy nhất (legacy), mỗi bước tính toán chờ 0.2s và 0.3s
+- 2 functions được xử lý concurrency ở 2 Thread khác nhau, bước tính toán chờ như trên
+- 2 function xử lý tài nguyên chung & cần cơ chế Lock
+- Tạo daemond thread để có thể tuỳ biến việc stop thread an toàn ...
 
 
 **Nguồn tham khảo**
-- https://toidicode.com/hoc-python-nang-cao
-- https://toidicode.com/class-va-cach-khai-bao-class-trong-python-357.html
-- https://toidicode.com/constructor-va-destructor-trong-python-358.html
+- https://viblo.asia/p/da-luong-trong-python-multithreading-WAyK8MO6ZxX
 
 
 **Kết quả thực thi**<br/>
-- *Basic Class*
+- *1 Thread duy nhất: 2 functions (legacy)*
 ```shell
-tdc@tdc:~/python/OOP$ python3 basic-class.py
-------------------------------------------------------------------------
-Các ví dụ liên quan đến Class cơ bản (member/constructor/destructor ...
---------------------------------------------
- - Taọ mới class Person ...
- ---> Hiển thị data của person: <__main__.Person object at 0x1099f7f10>
-------> name: EMPTY, age: 10, birthday: 2020-10-10 00:00:00, active: True
----------------------------------
------ Modify data of Person -----
----------------------------------
- ---- person.age =  100
- ---- person.name = Value of Name
- ---> Hiển thị data của person: <__main__.Person object at 0x1099f7f10>
-------> name: Value of Name, age: 100, birthday: 2022-07-08 00:00:00, active: False
----------------------------------
---------- Khởi tạo Person2 ------
----------------------------------
- ---> Hiển thị data của person: <__main__.Person object at 0x1099f7d50>
-------> name: NAME 2, age: 222, birthday: 2020-10-10 00:00:00, active: True
---------------------------------------------
-Tiến hành gọi hàm destrutor() của Person ...Value of Name
-------------- END --------------------------
---------------------------------------------
-Tiến hành gọi hàm destrutor() của Person ...NAME 2
-------------- END --------------------------
+tdc@tdc:~/python/multi-threading$ python3 one-thread+2functions.py
+Ví dụ về xử lý data luồng (1 thread + 2 functions tính toán) ...
+-------------------------------------------------------
+
+--- Hàm cal_square với numbers: (2, 6, 7, 30, 10, 9, 17, 20, -30)
+ ----> Current number 2: square(2) = 4
+ ----> Current number 6: square(6) = 36
+ ----> Current number 7: square(7) = 49
+ ----> Current number 30: square(30) = 900
+ ----> Current number 10: square(10) = 100
+ ----> Current number 9: square(9) = 81
+ ----> Current number 17: square(17) = 289
+ ----> Current number 20: square(20) = 400
+ ----> Current number -30: square(-30) = 900
+
+--- Hàm cal_cube với numbers: [1, 2, 5, 10, 11, 12, 15, 8, 77, -39]
+ ===> Current number 1: cube(1) = 1
+ ===> Current number 2: cube(2) = 8
+ ===> Current number 5: cube(5) = 125
+ ===> Current number 10: cube(10) = 1000
+ ===> Current number 11: cube(11) = 1331
+ ===> Current number 12: cube(12) = 1728
+ ===> Current number 15: cube(15) = 3375
+ ===> Current number 8: cube(8) = 512
+ ===> Current number 77: cube(77) = 456533
+ ===> Current number -39: cube(-39) = -59319
+>> Tổng thời gian: 4
 
 ```
 
-- *public-protected-private*
+- *2 Threads + xử lý 2 functions*
 ```shell
-tdc@tdc:~/python/OOP$ python3 public-protected-private.py
-----------------------------------------------------------------------------
-Các ví dụ liên quan đến public/protected/private variable/methods ...
-----------------------------------------------------------------------------
+tdc@tdc:~/python/multi-threading$ python3 two-threads.py
+------------------------------------------------------------------------
+Ví dụ về xử lý data luồng (2 threads cho 2 functions tính toán) ...
+-------------------------------------------------------
 
------------------ Show Person (new created) ----------------
-   ------> <__main__.Person object at 0x102ddb450>
-Value of attr02: Value 02222222222
-Value of attr03: Giá trị của Attribute 03
-------> name: EMPTY, age: 10, birthday: 2020-10-10 00:00:00, active: True
---------------------------------------------
-Tiến hành gọi hàm destrutor() của Person ...EMPTY
-------------- END --------------------------
+--- Hàm cal_square với numbers: (2, 6, 7, 30, 10, 9, 17, 20, -30)
+
+--- Hàm cal_cube với numbers: [1, 2, 5, 10, 11, 12, 15, 8, 77, -39]
+ ----> Current number 2: square(2) = 4
+ |||||||||||| ~ ~ ~> Current number 1: CUBE(1) = 1
+ ----> Current number 6: square(6) = 36
+ ----> Current number 7: square(7) = 49
+ |||||||||||| ~ ~ ~> Current number 2: CUBE(2) = 8
+ ----> Current number 30: square(30) = 900
+ |||||||||||| ~ ~ ~> Current number 5: CUBE(5) = 125
+ ----> Current number 10: square(10) = 100
+ |||||||||||| ~ ~ ~> Current number 10: CUBE(10) = 1000
+ ----> Current number 9: square(9) = 81
+ ----> Current number 17: square(17) = 289
+ |||||||||||| ~ ~ ~> Current number 11: CUBE(11) = 1331
+ ----> Current number 20: square(20) = 400
+ ----> Current number -30: square(-30) = 900
+ |||||||||||| ~ ~ ~> Current number 12: CUBE(12) = 1728
+ |||||||||||| ~ ~ ~> Current number 15: CUBE(15) = 3375
+ |||||||||||| ~ ~ ~> Current number 8: CUBE(8) = 512
+ |||||||||||| ~ ~ ~> Current number 77: CUBE(77) = 456533
+ |||||||||||| ~ ~ ~> Current number -39: CUBE(-39) = -59319
+>> Tổng thời gian: 3
 
 
 ```
 
-- *Kế thừa (nhiều class)*
+- *Xử lý tài nguyên chung & Apply cơ chế Lock*
 ```shell
-tdc@tdc:~/python/OOP$ python3 inherits.py 
+tdc@tdc:~/python/multi-threading$ python3 ...
 ------------------------------------------------------------------------
-Các ví dụ liên quan đến kế thừa Class ...
---------------------------------------------
-
------------------ Show all data of Male after being created -----------
-------> name: Name of MALE, age: 1234, birthday: 2020-10-10 00:00:00, active: True
-
------------------ Try to update some properties of Male ---------------
-Animal: eat() ...
-Animal: sleep() ...
-------> name: Update Name of MALE, age: 12, birthday: 2020-10-10 00:00:00, active: False
-
-------------------------------------------------------------------------
-
-Data of Female --------------------------------------
-Person: Name of MALE
-Person: 10
-Animal: eat() ...
-Animal: sleep() ...
---- Show Female name: Name of MALE
---- Show Female age: 10
---------------------------------------------
-Tiến hành gọi hàm destrutor() của Person ...Update Name of MALE
-------------- END --------------------------
---------------------------------------------
-Tiến hành gọi hàm destrutor() của Person ...Name of MALE
-------------- END --------------------------
 
 ```
 
-- *Abstraction*
+- *Tạo Daemond Thread để tuỳ biến việc stop thread an toàn*
 ```shell
-tdc@tdc:~/python/OOP$ python3 abstraction.py
+tdc@tdc:~/python/multi-threading$ python3 ...
 ------------------------------------------------------------------------
-Các ví dụ liên quan đến Abstraction ...
---------------------------------------------
-Try to initialize Person ...
-Exception occur: ... [Can't instantiate abstract class Person with abstract methods methodAbstract01, methodAbstract02]
-
-------------------------------------------------------------------------
-
------- RealPerson.methodAbstract01: 
-----------------------------------------------------
----- Method Abstract01, name: EMPTY
----- Method Abstract01, age: 10
-
------- RealPerson.methodAbstract02: 
-----------------------------------------------------
----- Method Abstract02, name: EMPTY
----- Method Abstract02, age: 10
---------------- Ket thuc RealPerson ------------------
 
 ```
