@@ -21,43 +21,34 @@ D:\Projects\python
 
 ==============================================================
 
-# Ví dụ [09.RabbitMQ+AMQP] Xử lý message queue dùng RabbitMQ với giao thức AMQP
+# Ví dụ [10.ProcessPDF] Xử lý tài liệu PDF trong Python
 ==============================================================
 
-**Dùng Docker Compose để khởi tạo message broker RabbitMQ**
-- Tham khảo file `docker-compose.yml`
-- Thực thi lệnh : 
+**Sử dụng thư viện liên quan để xử lý PDF**
 ```shell
-docker-compose up
-```
-
-**Sử dụng thư viện pika trong Python để tương tác với RabbitMQ**
-```shell
-pip3 install pika
+pip3 install ...
 ```
 
 **Ta sẽ tạo các Class Python bao gồm:**<br/>
-- Tạo 1 Producer để push messages đến RabbitMQ vào 1 queue chỉ định
-- Tạo 1 Consumer để get message từ RabbitMQ từ 1 queue chỉ định
+- Xử lý ...
+- Xử lý tiếp theo ...
 
 
 **Nguồn tham khảo**
-- https://www.lhsang.dev/posts/technique/rabbitmq/
-- https://galaxyz.net/cach-su-dung-rabbitmq-va-pythons-puka-de-gui-thong-diep-den-nhieu-nguoi-tieu-dung.2238.anews
-- https://www.phamquangloc.vn/2020/08/reference-test-RabbitMQ-performance-voi-python-dung-pika.html
+- https://laptrinhvien.net/lam-viec-voi-cac-tep-pdf-bang-python/
+- https://products.fileformat.com/vi/pdf/python/pikepdf/
+- https://codelearn.io/sharing/convert-content-to-pdf-by-python-pdfkit
 
 **Kết quả thực thi**<br/>
 ```shell
-tdc@tdc:~/python/rabbitmq-amqp$ python3 producer.py 
+tdc@tdc:~/python/process-pdf$ python3 ...
 -----------------------------------------------------------------
- >> Sent message at time: 2023-10-09 11:00:53.930411
+
 
 ```
 
 ```shell
-tdc@tdc:~/python/rabbitmq-amqp$ python3 consumer.py 
+tdc@tdc:~/python/process-pdf$ python3
 -----------------------------------------------------------------
-|| Hiện tại đang bị lỗi, sẽ giải quyết sau: 
- [*] Waiting for messages:
 
 ```
